@@ -20,17 +20,17 @@ export default function IndexPage() {
       <StickyProvider>
         <Layout>
           <SEO
-            title="Get your free CNDD link"
-            description="Now claim your candid store and share product recommendations seamlessly. Earn money when people buy from your store"
+            title="Startup Hosting Classic Landing"
+            description="Collection of free top of the line startup landing templates built using react/ next js. Free to download, simply edit and deploy! Updated weekly!"
           />
           <Banner />
           <Features />
-          {/* <FaqOne /> */}
+          <FaqOne />
           <ProductFeature />
-          {/* <Services /> */}
+          <Services />
           <Pricing />
-          {/* <CustomerSupport />
-          <Video /> */}
+          <CustomerSupport />
+          <Video />
           <FaqTwo />
         </Layout>
       </StickyProvider>
