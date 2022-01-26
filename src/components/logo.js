@@ -3,7 +3,7 @@
 
 import { jsx, Image } from 'theme-ui';
 import { Link } from 'components/link';
-import logo from 'assets/logo.png';
+import logo from 'assets/logo.svg';
 import {Heading} from 'theme-ui'
 
 export default function Logo() {
