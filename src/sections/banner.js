@@ -17,6 +17,7 @@ import client2 from 'assets/client-2.svg';
 import client3 from 'assets/client-3.svg';
 import sectionImage from 'assets/banner-1.svg';
 import { useRouter } from 'next/router'
+import axios from 'axios'
 
 const BANNER_DATA = {
   title: 'Convert your page into a store front',
@@ -39,13 +40,15 @@ const BANNER_DATA = {
   image: sectionImage,
 };
 const Banner = () => {
-  const router = useRouter()
   const [signedup,setSignedup] = React.useState(false)
   const [email,setEmail] = React.useState("")
   const signup = () => {
     console.log(email)
-    
-    setSignedup(true)
+    axios.post('https://sim4yarfg6.execute-api.ap-south-1.amazonaws.com/prod/leadgen', {email_id : email})
+      .then(res => {
+        setSignedup(true)
+      })
+      .catch(err => {console.log('error in request', err)});
   }
 
 
@@ -71,8 +74,8 @@ const Banner = () => {
                 placeholder="Your email address"
                 value = {email}
                 onChange={(e)=>setEmail(e.target.value)}
-                name="emailaddress"
-                id="emailaddress"
+                // name="emailaddress"
+                // id="email"
               />
               
               <Button onClick={signup}>Sign Up</Button> 

@@ -32,7 +32,7 @@ const styles = {
     margin: '0 auto 50px',
   },
   slogan: {
-    color: '#00A99D',
+    color: '#d7354a',
     fontWeight: 500,
     fontSize: 2,
     lineHeight: 2.5,

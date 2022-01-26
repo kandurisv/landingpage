@@ -48,7 +48,7 @@ const FAQ_TWO_DATA = {
     },
   ],
   button: {
-    link: '#',
+    link: 'mailto:sai@getcandid.app',
     label: 'More Questions? Contact us',
   },
 };
@@ -127,7 +127,7 @@ const styles = {
     mb: ['0', null, null, null, '40px'],
     textAlign: 'center',
     p: {
-      color: '#00A99D',
+      color: '#d7354a',
       fontSize: '16px',
     },
     h3: {

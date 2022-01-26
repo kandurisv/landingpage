@@ -90,7 +90,7 @@ const styles = {
     m: [null, null, null, '0 auto', 'unset'],
   },
   slogan: {
-    color: '#00A99D',
+    color: '#d7354a',
     fontSize: '16px',
     textAlign: ['center', null, null, null, 'left'],
     fontWeight: 500,

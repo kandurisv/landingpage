@@ -52,12 +52,12 @@ export default function Footer() {
       >
         <Logo />
         <Text sx={styles.copyright}>
-          &copy; Copyright by {new Date().getFullYear()} Candid Inc.
+          &copy; Copyright by {new Date().getFullYear()} Mish Tech Inc.
         </Text>
         <Box sx={styles.bottomMenu}>
           <Link path="/" label="Home" />
-          <Link path="/" label="Privacy Policy" />
-          <Link path="/" label="Terms & Conditions" />
+          <Link path="/pp" label="Privacy Policy" />
+          <Link path="/tnc" label="Terms & Conditions" />
         </Box>
       </Container>
     </footer>
