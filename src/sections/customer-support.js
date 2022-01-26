@@ -38,7 +38,7 @@ const CustomerSupport = () => {
               {list.map((item, i) => (
                 <Text as="li" key={i}>
                   <IoIosCheckmarkCircle
-                    sx={{ color: '#3CC68A', mr: 2 }}
+                    sx={{ color: '#d95f76', mr: 2 }}
                     size="20px"
                   />
                   {item}

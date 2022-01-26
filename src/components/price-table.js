@@ -4,8 +4,14 @@ import { jsx, Box, Button, Heading, Text } from 'theme-ui';
 import { IoMdCheckmarkCircle } from 'react-icons/io';
 import { IoIosCloseCircle } from 'react-icons/io';
 import { rgba } from 'polished';
+import { useRouter } from 'next/router';
 
 const PriceTable = ({ price }) => {
+  const router = useRouter()
+  const signup = () => {
+    router.push('/signup.html')
+  }
+
   return (
     <Box
       sx={styles.priceTable}
@@ -27,7 +33,7 @@ const PriceTable = ({ price }) => {
           {price?.price}
           
         </Text>
-        <Button sx={styles.button} variant="text">
+        <Button sx={styles.button} variant="text" onClick = {signup}>
           {price.buttonText}
         </Button>
       </Box>
@@ -70,7 +76,7 @@ const styles = {
     '&.recommended': {
       boxShadow: [null, null, null, '0px 15px 50px rgba(91, 132, 193, 0.1)'],
       button: {
-        backgroundColor: '#3CC68A',
+        backgroundColor: '#d95f76',
         color: 'white',
         transition: 'all 500ms ease',
         '&:hover': {
@@ -144,8 +150,8 @@ const styles = {
     },
   },
   button: {
-    border: `1.5px solid ${rgba('#3CC68A', 0.15)}`,
-    color: '#3CC68A',
+    border: `1.5px solid ${rgba('#d95f76', 0.15)}`,
+    color: '#d95f76',
     cursor: 'pointer',
     fontWeight: 700,
     minHeight: [40, null, null, null, 50],
@@ -153,7 +159,7 @@ const styles = {
     fontSize: [1, null, null, null, 2],
     mt: [3, null, null, 6],
     ':hover': {
-      borderColor: '#3CC68A',
+      borderColor: '#d95f76',
     },
   },
 };

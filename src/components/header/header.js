@@ -38,7 +38,7 @@ export default function Header({ className }) {
           </Link>
           <Link
             sx={styles.loginBtn}
-            path="/"
+            path="/signup.html"
             label="Sign Up"
             sx={styles.headerBtn}
             variant="buttons.primary"
@@ -53,7 +53,7 @@ export default function Header({ className }) {
 
 const styles = {
   headerBtn: {
-    backgroundColor: '#3CC68A',
+    backgroundColor: '#d95f76',
     fontSize: '16px',
     fontWeight: 'bold',
     letterSpacing: '-0.16px',

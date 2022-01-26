@@ -16,6 +16,7 @@ import client1 from 'assets/client-1.svg';
 import client2 from 'assets/client-2.svg';
 import client3 from 'assets/client-3.svg';
 import sectionImage from 'assets/banner-1.svg';
+import { useRouter } from 'next/router'
 
 const BANNER_DATA = {
   title: 'Convert your page into a store front',
@@ -38,6 +39,16 @@ const BANNER_DATA = {
   image: sectionImage,
 };
 const Banner = () => {
+  const router = useRouter()
+  const [signedup,setSignedup] = React.useState(false)
+  const [email,setEmail] = React.useState("")
+  const signup = () => {
+    console.log(email)
+    
+    setSignedup(true)
+  }
+
+
   const { title, text, clients, image , subcontent} = BANNER_DATA;
   return (
     <Box as="section" id="banner" sx={styles.section}>
@@ -45,21 +56,27 @@ const Banner = () => {
         <Flex sx={styles.flex}>
           <Box sx={styles.content}>
             <Heading as="h2">{title}</Heading>
-            <Text as="p">{text}</Text>
+            <Text as="h4">{text}</Text>
             
             <Heading as="h3">{subcontent}</Heading>
+            {signedup ?
+              <Text as="p">Thanks for signing up! We will mail you shortly with more updates</Text> :
             <Box as="form">
-              <Label variant="styles.srOnly" htmlFor="domainName">
+            
+              <Label variant="styles.srOnly" htmlFor="emailaddress">
                 Email Address
               </Label>
               <Input
                 type="text"
                 placeholder="Your email address"
-                name="domainName"
-                id="domainName"
+                value = {email}
+                onChange={(e)=>setEmail(e.target.value)}
+                name="emailaddress"
+                id="emailaddress"
               />
-              <Button>Sign Up</Button>
-            </Box>
+              
+              <Button onClick={signup}>Sign Up</Button> 
+            </Box>  }
             {/* <Box sx={styles.clients}>
               <Text as="span">Our clients</Text>
               {clients.map(({ link, image }, index) => (
@@ -113,7 +130,7 @@ const styles = {
       mb: '10px',
       mx: ['0', null, null, 'auto'],
     },
-    p: {
+    h4: {
       fontSize: ['15px', null, '16px'],
       lineHeight: [2, null, 2.62],
       color: '#02073E',
@@ -125,6 +142,14 @@ const styles = {
       lineHeight: [2, null, 2.62],
       color: '#02073E',
       maxWidth: '486px',
+    },
+    p: {
+      fontSize: ['10px', null, '16px'],
+      marginTop :  10,
+      lineHeight: [2, null, 2.62],
+      color: '#d95f76',
+      maxWidth: '486px',
+      fontStyle : 'italic'
     },
     form: {
       display: 'flex',

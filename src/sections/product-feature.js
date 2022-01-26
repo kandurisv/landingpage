@@ -22,7 +22,7 @@ const PRODUCT_FEATURE = {
       title: 'Unlimited Social Links',
       text: 'Now link all your social accounts from facebook to sharechat to trell',
       button: {
-        link: '#',
+        link: '/signup.html',
         label: 'Sign Up',
       },
     },
@@ -32,7 +32,7 @@ const PRODUCT_FEATURE = {
       title: 'Custom Affiliates',
       text: 'Add your own custom affiliate ids to maximize your affiliate revenue.',
       button: {
-        link: '#',
+        link: '/signup.html',
         label: 'Sign Up',
       },
     },
@@ -41,7 +41,7 @@ const PRODUCT_FEATURE = {
       title: 'Analytics that help',
       text: 'get analytic reports that will help you understand what products to recommend.',
       button: {
-        link: '#',
+        link: '/signup.html',
         label: 'Sign Up',
       },
     },
