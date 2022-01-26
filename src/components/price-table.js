@@ -42,7 +42,7 @@ const PriceTable = ({ price }) => {
           <li key={feat.id} className={!feat.isAvailable ? 'unavailable' : ''}>
             {feat.isAvailable ? (
               <span>
-                <IoMdCheckmarkCircle sx={{ color: '#FFC059' }} />
+                <IoMdCheckmarkCircle sx={{ color: '#3cc68a' }} />
               </span>
             ) : (
               <span>
