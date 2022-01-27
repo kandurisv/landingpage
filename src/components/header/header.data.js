@@ -19,9 +19,4 @@ export default [
     label: 'FAQs',
     offset: -70,
   },
-  {
-    path: 'footer',
-    label: 'Blog',
-    offset: -100,
-  },
 ];

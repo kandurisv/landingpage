@@ -8,6 +8,7 @@ import { DrawerProvider } from 'contexts/drawer/drawer.provider';
 import lock from 'assets/lock.svg';
 import MobileDrawer from './mobile-drawer';
 import menuItems from './header.data';
+import Link1 from 'next/link'
 
 export default function Header({ className }) {
   return (
@@ -31,17 +32,19 @@ export default function Header({ className }) {
                 {label}
               </ScrollLink>
             ))}
+
           </Flex>
           <Link path="/" sx={styles.loginBtn}>
             {/* <Image src={lock} alt="" />
             Login */}
           </Link>
+
+          
           <Link
             sx={styles.loginBtn}
-            path="/signup.html"
-            label="Sign Up"
+            path="https://blog.getcandid.app/"
+            label="Blog"
             sx={styles.headerBtn}
-            variant="buttons.primary"
           />
 
           <MobileDrawer />
@@ -53,6 +56,25 @@ export default function Header({ className }) {
 
 const styles = {
   headerBtn: {
+    backgroundColor: '#f29183',
+    fontSize: '15px',
+    fontWeight: 'normal',
+    letterSpacing: '-0.16px',
+    borderRadius: '5px',
+    color: '#ffffff',
+    borderWidth : '4px', 
+    borderColor : 'black',
+    padding: '4.0px 16px',
+    display: ['none', null, null, null, 'inline-block'],
+    ml: ['0', null, null, 'auto', '0'],
+    mr: ['0', null, null, '20px', '0'],
+    transition: 'all 500ms ease',
+    '&:hover': {
+      color: '#fff',
+      backgroundColor: 'secondary',
+    },
+  },
+  blogBtn: {
     backgroundColor: '#d95f76',
     fontSize: '16px',
     fontWeight: 'bold',
@@ -62,7 +84,7 @@ const styles = {
     padding: '6.5px 24px',
     display: ['none', null, null, null, 'inline-block'],
     ml: ['0', null, null, 'auto', '0'],
-    mr: ['0', null, null, '20px', '0'],
+    mr: ['20px', '20px', '20px', '20px', '0'],
     transition: 'all 500ms ease',
     '&:hover': {
       color: '#fff',
