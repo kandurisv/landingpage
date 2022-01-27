@@ -19,27 +19,17 @@ const data = [
       {
         id: 1,
         isAvailable: true,
-        title: 'Unlimited Social Links',
+        title: '50 Products',
       },
       {
         id: 2,
         isAvailable: true,
-        title: `50 Website Links`,
+        title: `50 Website/Social Links`,
       },
       {
         id: 3,
         isAvailable: true,
         title: `5 Affiliate Ids`,
-      },
-      {
-        id: 4,
-        isAvailable: true,
-        title: `20 Custom recos`,
-      },
-      {
-        id: 5,
-        isAvailable: true,
-        title: `30 Candid recos`,
       },
       {
         id: 6,
@@ -72,34 +62,24 @@ const data = [
     id: 2,
     title: 'Premium Pack',
     subtitle: 'For expert reviewers who recommend products after thorough research',
-    price: "₹199 per yr.",
+    price: "₹99 per mo.",
     isRecommended: false,
     buttonText: 'Start Free Trial',
     features: [
       {
         id: 1,
         isAvailable: true,
-        title: 'Unlimited Social Links',
+        title: '150 Products',
       },
       {
         id: 2,
         isAvailable: true,
-        title: `Unlimited Website Links`,
+        title: `Unlimited Website/Social Links`,
       },
       {
         id: 3,
         isAvailable: true,
         title: `20 Affiliate Ids`,
-      },
-      {
-        id: 4,
-        isAvailable: true,
-        title: `50 Custom recos`,
-      },
-      {
-        id: 5,
-        isAvailable: true,
-        title: `100 Candid recos`,
       },
       {
         id: 6,
@@ -132,34 +112,24 @@ const data = [
     id: 3,
     title: 'Ultimate Pack',
     subtitle: 'For influencers who partner with brands and help companies spread their reach',
-    price: "₹499 per yr.",
+    price: "₹199 per mo.",
     isRecommended: false,
     buttonText: 'Start Free Trial',
     features: [
       {
         id: 1,
         isAvailable: true,
-        title: 'Unlimited Social Links',
+        title: '500 Products',
       },
       {
         id: 2,
         isAvailable: true,
-        title: `Unlimited Website Links`,
+        title: `Unlimited Website/Social Links`,
       },
       {
         id: 3,
         isAvailable: true,
         title: `Unlimited Affiliate Ids`,
-      },
-      {
-        id: 4,
-        isAvailable: true,
-        title: `100 Custom recos`,
-      },
-      {
-        id: 5,
-        isAvailable: true,
-        title: `200 Candid recos`,
       },
       {
         id: 6,
