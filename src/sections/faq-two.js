@@ -17,15 +17,9 @@ const FAQ_TWO_DATA = {
     },
     {
       status: false,
-      title: 'What are custom recommendations (recos) ?',
+      title: 'What all products can I add?',
       text:
-        "We will directly link your product recommendations to your affiliate id. This will ensure you getting paid directly from brand when user buys a product." ,
-    },
-    {
-      status: false,
-      title: 'What are candid recos?',
-      text:
-        "Your product recos will link to Candid Affiliate account. If you make a sale, you will be rewarded in Candid coins which you can redeem",
+        "You can add any product and the corresponding affiliate link. Or you can search for products in our database if you don't have an affiliate link." ,
     },
     {
       status: false,
