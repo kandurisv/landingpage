@@ -1,35 +1,39 @@
-import React from 'react';
-import Image from 'next/image';
-import { Box, Container, Flex, Heading, Text } from 'theme-ui';
-import image1 from 'assets/features-1.svg';
-import image2 from 'assets/features-2.svg';
-import image3 from 'assets/features-3.svg';
-const FEATURES_DATA = {
-  title: 'Go beyond ultimate features',
-  text: 'Ideal Bio in Link tool for you',
-  posts: [
-    {
-      image: image3,
-      title: 'For Hobbyists',
-      text:
-        'Start earning affiliate revenue by just signing up and recommending best products to your network.',
-    },
-    {
-      image: image2,
-      title: 'For Expert Reviewers',
-      text:
-        'Create your own store front with amazing products you explored and felt awe with.',
-    },
-    {
-      image: image1,
-      title: 'For Influencers',
-      text:
-        'Leverage your partnerships with brands to get higher revenue. Get advanced analytics to maximize your potential',
-    },
-  ],
-};
+import React from "react";
+import Image from "next/image";
+import { Box, Container, Flex, Heading, Text } from "theme-ui";
+import image1 from "assets/features-1.svg";
+import image2 from "assets/features-2.svg";
+import image3 from "assets/features-3.svg";
+import { useRouter } from "next/router";
+import { translation } from "translation";
+
 const Features = () => {
+  const { locale } = useRouter();
+  const lang = translation[locale].highlightsSection;
+
+  const FEATURES_DATA = {
+    title: lang.Header,
+    text: lang.subHeader,
+    posts: [
+      {
+        image: image3,
+        title: lang.Tile1.Title,
+        text: lang.Tile1.Content,
+      },
+      {
+        image: image2,
+        title: lang.Tile2.Title,
+        text: lang.Tile2.Content,
+      },
+      {
+        image: image1,
+        title: lang.Tile3.Title,
+        text: lang.Tile3.Content,
+      },
+    ],
+  };
   const { title, text, posts } = FEATURES_DATA;
+
   return (
     <Box as="section" id="features" sx={styles.section}>
       <Container sx={styles.container}>
@@ -59,64 +63,64 @@ export default Features;
 
 const styles = {
   section: {
-    overflow: 'hidden',
-    pt: ['70px', null, null, '100px'],
-    pb: ['40px', null, null, '70px'],
+    overflow: "hidden",
+    pt: ["70px", null, null, "100px"],
+    pb: ["40px", null, null, "70px"],
   },
   container: {},
   flex: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
   },
   sectionTitle: {
-    textAlign: 'center',
-    mb: ['40px', null, null, '70px'],
+    textAlign: "center",
+    mb: ["40px", null, null, "70px"],
     h2: {
-      color: '#0F2137',
+      color: "#0F2137",
       fontWeight: 500,
-      fontSize: ['22px', null, null, '24px'],
+      fontSize: ["22px", null, null, "24px"],
       lineHeight: 1,
-      letterSpacing: '-0.5px',
-      mt: '15px',
+      letterSpacing: "-0.5px",
+      mt: "15px",
     },
     p: {
-      color: 'secondary',
-      fontSize: '16px',
+      color: "secondary",
+      fontSize: "16px",
       lineHeight: 1.87,
     },
   },
   post: {
-    mb: '30px',
-    mx: ['0', null, null, null, null, '15px'],
-    display: 'flex',
-    flex: ['0 0 100%', null, null, '0 0 calc(33.333% - 30px)'],
-    flexDirection: ['column', null, null, null, 'row'],
-    justifyContent: ['center', null, 'flex-start'],
-    textAlign: ['center', null, null, 'left'],
-    '>.image': {
+    mb: "30px",
+    mx: ["0", null, null, null, null, "15px"],
+    display: "flex",
+    flex: ["0 0 100%", null, null, "0 0 calc(33.333% - 30px)"],
+    flexDirection: ["column", null, null, null, "row"],
+    justifyContent: ["center", null, "flex-start"],
+    textAlign: ["center", null, null, "left"],
+    ">.image": {
       flexShrink: 0,
-      width: '70px',
-      height: '70px',
-      mx: ['auto', null, null, '0'],
+      width: "70px",
+      height: "70px",
+      mx: ["auto", null, null, "0"],
     },
   },
   postContent: {
-    ml: ['0', null, null, null, '30px'],
-    mt: ['20px', null, null, null, '0'],
+    ml: ["0", null, null, null, "30px"],
+    mt: ["20px", null, null, null, "0"],
     h3: {
-      fontSize: '18px',
+      fontSize: "18px",
       fontWeight: 700,
       lineHeight: 1,
-      color: '#0F2137',
-      mb: '15px',
+      color: "#0F2137",
+      mb: "15px",
     },
     p: {
-      color: '#343D48',
+      color: "#343D48",
       lineHeight: 1.87,
-      fontSize: ['14px', null, null, '16px'],
-      maxWidth: ['100%', '300px', null, '100%'],
-      mx: [null, 'auto', null],
+      fontSize: ["14px", null, null, "16px"],
+      maxWidth: ["100%", "300px", null, "100%"],
+      mx: [null, "auto", null],
     },
   },
 };
