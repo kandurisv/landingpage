@@ -1,5 +1,5 @@
 module.exports = {
-  siteUrl: 'https://startuplanding.io',
+  siteUrl: "https://www.cndd.in/",
   generateRobotsTxt: true,
   // optional
   // robotsTxtOptions: {
