@@ -21,6 +21,7 @@ export default function IndexPage() {
   const [variant, setVariant] = React.useState(0);
 
   React.useEffect(() => {
+    console.log("variant", variant);
     const handleRouteChange = (url) => {
       pageview(url);
     };

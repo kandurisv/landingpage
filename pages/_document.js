@@ -24,8 +24,8 @@ class CustomDocument extends Document {
             gtag('js', new Date());
             gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
               page_path: window.location.pathname,
+              optimize_id: 'OPT-NKWNRBH'
             });
-            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', { 'optimize_id': 'OPT-NKWNRBH'});
           `,
             }}
           />
