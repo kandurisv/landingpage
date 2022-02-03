@@ -14,6 +14,7 @@ import Services from "sections/services";
 import ProductFeature from "sections/product-feature";
 import CustomerSupport from "sections/customer-support";
 import Banner1 from "sections/banner1";
+import { useRouter } from "next/router";
 
 export default function IndexPage() {
   const router = useRouter();
