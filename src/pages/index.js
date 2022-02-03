@@ -13,8 +13,25 @@ import Pricing from "sections/pricing";
 import Services from "sections/services";
 import ProductFeature from "sections/product-feature";
 import CustomerSupport from "sections/customer-support";
+import { pageview, event } from "analytics/ga";
 
 export default function IndexPage() {
+  const router = useRouter();
+
+  React.useEffect(() => {
+    const handleRouteChange = (url) => {
+      pageview(url);
+    };
+    //When the component is mounted, subscribe to router changes
+    //and log those page views
+    router.events.on("routeChangeComplete", handleRouteChange);
+
+    // If the component is unmounted, unsubscribe
+    // from the event with the `off` method
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
   return (
     <ThemeProvider theme={theme}>
       <StickyProvider>
