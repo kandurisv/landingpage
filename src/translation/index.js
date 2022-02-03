@@ -140,6 +140,149 @@ export const translation = {
     footerSection: {
       footer: ["Home", "Privacy Policy", "Terms & Conditions"],
     },
+
+    v1: {
+      HeaderSection: {
+        Header: ["Home", "Features", "Pricing", "FAQs"],
+        Blog: "Blog",
+        Title: "Become an affiliate marketer in 2 mins",
+        SubTitle:
+          "Recommend amazing products to your network and earn money when they buy from your store",
+        ImageTitle: "I love this product",
+        ImageSubTitle: "Recommend to earn",
+        SignupTitle:
+          "Sign up for early access and get 6 months of influencer plan for free !",
+        emailPlaceholder: "Your email address",
+        signUpText: "Sign Up",
+        signedUpSubTitle:
+          "Thanks for signing up! We will mail you shortly with more updates",
+      },
+      highlightsSection: {
+        Header: "Go beyond ultimate features",
+        subHeader: "Ideal Bio in Link tool for you",
+        Tile1: {
+          Title: "For Hobbyists",
+          Content:
+            "Start earning affiliate revenue by just signing up and recommending best products to your network.",
+        },
+        Tile2: {
+          Title: "For Expert Reviewers",
+          Content:
+            "Create your own store front with amazing products you explored and felt awe with.",
+        },
+        Tile3: {
+          Title: "For Influencers",
+          Content:
+            "Leverage your partnerships with brands to get higher revenue. Get advanced analytics to maximize your potential",
+        },
+      },
+      featuresSection: {
+        signupText: "Sign Up",
+        popularText: "Most Popular",
+        Header: "Ultimate features that work for you",
+        subHeader: "Product features",
+        Tile1: {
+          Title: "Unlimited Social Links",
+          Content:
+            "Now link all your social accounts from facebook to sharechat to trell.",
+        },
+        Tile2: {
+          Title: "Custom Affiliates",
+          Content:
+            "Add your own custom affiliate ids to maximize your affiliate revenue.",
+        },
+        Tile3: {
+          Title: "Analytics that help",
+          Content:
+            "Get analytic reports that will help you understand what products to recommend.",
+        },
+      },
+      pricingSection: {
+        Header: "Meet our pricing plan that suit you",
+        subHeader: "Deals for you",
+        Tile1: {
+          Title: "Basic Pack",
+          Content:
+            "For hobbyists who like to recommend products they used to their friends.",
+          pricing: "Forever free",
+          buttonText: "Sign Up",
+          features: [
+            "50 Products",
+            "50 Website/Social Links",
+            "5 Affiliate Ids",
+            "Support for Indian Local Languages",
+            "Basic Analytics",
+            "Basic Support",
+            "Bucketing",
+            "Product Analytics",
+          ],
+        },
+        Tile2: {
+          Title: "Premium Pack",
+          Content:
+            "For expert reviewers who recommend products after thorough research.",
+          pricing: "₹99 per mo.",
+          buttonText: "Start Free Trial",
+          features: [
+            "150 Products",
+            "Unlimited Website/Social Links",
+            "20 Affiliate Ids",
+            "Support for Indian Local Languages",
+            "Basic Analytics",
+            "Premium Support",
+            "10 Buckets",
+            "Product Analytics",
+          ],
+        },
+        Tile3: {
+          Title: "Ultimate Pack",
+          Content:
+            "For influencers who partner with brands and help companies spread their reach.",
+          pricing: "₹199 per mo.",
+          buttonText: "Start Free Trial",
+          features: [
+            "500 Products",
+            "Unlimited Website/Social Links",
+            "Unlimited Affiliate Ids",
+            "Support for Indian Local Languages",
+            "Basic Analytics",
+            "Premium Support",
+            "Unlimited Buckets",
+            "Product Analytics",
+          ],
+        },
+      },
+      faqSection: {
+        Header: "Meet our pricing plan that suit you",
+        subHeader: "Deals for you",
+        moreQuestions: "More Questions? Contact us",
+        questions: [
+          {
+            Title: "What are affiliate ids?",
+            Text: "If you partner with a brand, they will provide you a code and linking tool. You can use both code or the link as your affiliate ids.",
+          },
+          {
+            Title: "What all products can I add?",
+            Text: "You can add any product and the corresponding affiliate link. Or you can search for products in our database if you don't have an affiliate link.",
+          },
+          {
+            Title: "Why should I bucket my recommendations?",
+            Text: "Bucketing helps your users browse throught the clutter. You can share only relevant recommendations with your users.",
+          },
+          {
+            Title: "What all Indian Languages are supported?",
+            Text: "We currently support English, Hindi and Telugu. Stay tuned as we are expanding our language support.",
+          },
+          {
+            Title: "What all analytics are provided?",
+            Text: "Every account will be provided with visits and clicks data of their page. Ultimate accounts will be equipped with product analytics to fine tune their recommendations with best selling products.",
+          },
+        ],
+      },
+      footerSection: {
+        footer: ["Home", "Privacy Policy", "Terms & Conditions"],
+      },
+    },
   },
   hi: {
     HeaderSection: {
