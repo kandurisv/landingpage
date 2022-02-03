@@ -27,6 +27,7 @@ class CustomDocument extends Document {
           `,
             }}
           />
+          <script src="https://www.googleoptimize.com/optimize.js?id=OPT-NKWNRBH"></script>
         </Head>
         <body>
           <Main />
