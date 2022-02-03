@@ -17,7 +17,7 @@ import Banner1 from "sections/banner1";
 import { useRouter } from "next/router";
 
 const useExperiment = (experimentId) => {
-  const [variant, setVariant] = useState();
+  const [variant, setVariant] = React.useState();
   React.useEffect(() => {
     (async () => {
       if (window.dataLayer) {
