@@ -15,6 +15,7 @@ class CustomDocument extends Document {
             async
             src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
           />
+          <script src="https://www.googleoptimize.com/optimize.js?id=OPT-NKWNRBH"></script>
           <script
             dangerouslySetInnerHTML={{
               __html: `
@@ -24,10 +25,10 @@ class CustomDocument extends Document {
             gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
               page_path: window.location.pathname,
             });
+            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', { 'optimize_id': 'OPT-NKWNRBH'});
           `,
             }}
           />
-          <script src="https://www.googleoptimize.com/optimize.js?id=OPT-NKWNRBH"></script>
         </Head>
         <body>
           <Main />
