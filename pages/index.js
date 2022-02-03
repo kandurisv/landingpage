@@ -16,27 +16,34 @@ import CustomerSupport from "sections/customer-support";
 import Banner1 from "sections/banner1";
 import { useRouter } from "next/router";
 
+const useExperiment = (experimentId) => {
+  const [variant, setVariant] = useState();
+  React.useEffect(() => {
+    (async () => {
+      if (window.dataLayer) {
+        await window.dataLayer.push({ event: "optimize.activate" });
+      }
+      const intervalId = setInterval(() => {
+        if (window.google_optimize !== undefined) {
+          // Set the variant to the state.
+          setVariant(window.google_optimize.get(experimentId));
+          clearInterval(intervalId);
+        }
+      }, 100);
+    })();
+  });
+  return variant;
+};
+
 export default function IndexPage() {
   const router = useRouter();
-  const [variant, setVariant] = React.useState(0);
+  const variant = useExperiment("65elEA0zTVyfg-IGET3tYA");
 
   React.useEffect(async () => {
-    console.log("variant", variant);
+    console.log("Variant", variant);
     const handleRouteChange = (url) => {
       pageview(url);
     };
-
-    if (window.dataLayer) {
-      await window.dataLayer.push({ event: "optimize.activate" });
-    }
-
-    const intervalId = setInterval(() => {
-      if (window.google_optimize !== undefined) {
-        const variant = window.google_optimize.get("65elEA0zTVyfg-IGET3tYA");
-        setVariant(variant);
-        clearInterval(intervalId);
-      }
-    }, 100);
 
     //When the component is mounted, subscribe to router changes
     //and log those page views
@@ -47,7 +54,8 @@ export default function IndexPage() {
     return () => {
       router.events.off("routeChangeComplete", handleRouteChange);
     };
-  }, [router.events]);
+  }, [router.events, variant]);
+
   return (
     <ThemeProvider theme={theme}>
       <StickyProvider>
