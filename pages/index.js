@@ -15,6 +15,7 @@ import ProductFeature from "sections/product-feature";
 import CustomerSupport from "sections/customer-support";
 import Banner1 from "sections/banner1";
 import { useRouter } from "next/router";
+import { initOptimize } from "analytics/go";
 
 const useExperiment = (experimentId) => {
   const [variant, setVariant] = React.useState();
@@ -40,6 +41,7 @@ export default function IndexPage() {
   const variant = useExperiment("65elEA0zTVyfg-IGET3tYA");
 
   React.useEffect(async () => {
+    initOptimize();
     console.log("Variant", variant);
     const handleRouteChange = (url) => {
       pageview(url);
@@ -64,7 +66,7 @@ export default function IndexPage() {
             title="Get your free CNDD link"
             description="Now claim your candid store and share product recommendations seamlessly. Earn money when people buy from your store"
           />
-          {variant ? <Banner /> : <Banner1 />}
+          {variant ? <Banner1 /> : <Banner />}
           <Features />
           {/* <FaqOne /> */}
           <ProductFeature />
