@@ -17,37 +17,6 @@ import { pageview, event } from "analytics/ga";
 import Banner1 from "sections/banner1";
 
 export default function IndexPage() {
-  const router = useRouter();
-  const [variant, setVariant] = React.useState(0);
-
-  React.useEffect(() => {
-    console.log("variant", variant);
-    const handleRouteChange = (url) => {
-      pageview(url);
-    };
-
-    if (window.dataLayer) {
-      await window.dataLayer.push({ event: "optimize.activate" });
-    }
-
-    const intervalId = setInterval(() => {
-      if (window.google_optimize !== undefined) {
-        const variant = window.google_optimize.get("65elEA0zTVyfg-IGET3tYA");
-        setVariant(variant);
-        clearInterval(intervalId);
-      }
-    }, 100);
-
-    //When the component is mounted, subscribe to router changes
-    //and log those page views
-    router.events.on("routeChangeComplete", handleRouteChange);
-
-    // If the component is unmounted, unsubscribe
-    // from the event with the `off` method
-    return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
-    };
-  }, [router.events]);
   return (
     <ThemeProvider theme={theme}>
       <StickyProvider>
