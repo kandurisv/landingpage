@@ -42,8 +42,8 @@ const Step5 = (props) => {
 
   const handleAffiliates = (e) => {
     e.preventDefault();
-    console.log(selectedAffiliates);
-    console.log(brandArray);
+    //  console.log(selectedAffiliates);
+    //  console.log(brandArray);
     let newSelectedAffiliates = [...selectedAffiliates];
     newSelectedAffiliates.push(
       affiliateBrand.current.value + " " + affiliateCode.current.value

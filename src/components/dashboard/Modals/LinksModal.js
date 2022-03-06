@@ -189,7 +189,7 @@ export function LinksModal({
         { timeout: 5000 }
       )
         .then((res) => {
-          // console.log("Sucess", res.data);
+          //   console.log("Sucess", res.data);
           newItem(res.data);
           setSortId((id) => id + 1);
           toast({
@@ -239,7 +239,7 @@ export function LinksModal({
         { timeout: 1000 }
       )
         .then((res) => {
-          // console.log("Sucess", res.data);
+          //     console.log("Sucess", res.data);
           newItem(res.data);
           setSortId((id) => id + 1);
           toast({
@@ -375,6 +375,7 @@ export function LinksModal({
                         </Flex>
                       )}
                       <input
+								        accept="image/png, image/jpeg, image/jpg"
                         type="file"
                         hidden
                         onChange={handleChange}

@@ -29,8 +29,8 @@ export function MainScreen({ links, recos, buckets, user, cookie }) {
 
   React.useEffect(() => {
     // console.log([...links]);
-    console.log("NEW LINKS", newLinks);
-    console.log("EXISTING LINKS", links);
+    // console.log("NEW LINKS", newLinks);
+    // console.log("EXISTING LINKS", links);
 
     setCurrentLinks([...links, ...newLinks]);
     // axios
