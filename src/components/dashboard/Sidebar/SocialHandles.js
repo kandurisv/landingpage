@@ -48,7 +48,7 @@ export function SocialHandles({ social, data }) {
       }}
     >
       <Text sx={style.heading}>Social Handles</Text>
-      <Grid gap={2} columns={[3, 6, 6, 6, 6, 6]} sx={style.grid}>
+      <Grid gap={2} columns={[4, 5, 6, 6, 6, 6]} sx={style.grid}>
         {data.map((item, index) => {
           return <SocialElement item={item} key={index} />;
         })}

@@ -120,6 +120,7 @@ const Step1 = (props) => {
 		
 		<Layout value={25}>
 					<Flex flexDirection={'column'} w='100%'>
+					<Flex  flexDirection={"column"} margin={6}>
 						<Heading size={'lg'} textAlign={{base:'center', md:'left'}}>Choose a Username</Heading>
 						<FormLabel
 							size={'md'}
@@ -177,6 +178,7 @@ const Step1 = (props) => {
 							</Flex>
 						</form>
 					</Flex>
+					</Flex>
 				</Layout>
 	);
 };
@@ -189,12 +191,21 @@ function UsernameMessage({ username, isValid, loading }) {
 				{username} is available!
 			</FormLabel>
 		);
-	} else if (username && !isValid) {
-		return (
-			<FormLabel >
-				That username is taken!
-			</FormLabel>
-		);
+	} 
+	else if (username)
+	{
+		if(username.length<3){
+			return (
+				<FormLabel>Username must be 3 or more letters.</FormLabel>
+			)
+		}
+		else if(!isValid){
+			return (
+				<FormLabel >
+					That username is taken!
+				</FormLabel>
+			);
+		}
 	} else {
 		return (
 			<FormLabel fontSize={15}>
