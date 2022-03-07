@@ -8,12 +8,17 @@ import { useRouter } from "next/router";
 import { ProductsCard } from "./ProductsCard";
 
 // Add a custom Link
-export function ProductsBucket({ bucketName, data, link }) {
+export function ProductsBucket({ bucketName, data, link, deleteItem }) {
   const router = useRouter();
 
   const bucketLinkClick = () => {
     console.log("link click", link.link);
-    window.open(link.link, "_blank");
+    if(link.link.substring(0, 8)!=="https://"){
+      window.open("https://"+link.link, "_blank");
+    }
+    else{
+      window.open(link.link, "_blank");
+    }
   };
 
   return (
@@ -36,7 +41,10 @@ export function ProductsBucket({ bucketName, data, link }) {
 
       <Flex sx={style.grid}>
         {data.map((item, index) => {
-          return <ProductsCard key={index} item={item} />;
+          return <ProductsCard key={index} item={item} deleteItem={(item)=>{
+            console.log('recosbucket', item);
+            deleteItem(item)}
+          } />;
         })}
       </Flex>
     </Container>

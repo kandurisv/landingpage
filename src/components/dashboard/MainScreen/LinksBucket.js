@@ -9,12 +9,17 @@ import { ProductsCard } from "./ProductsCard";
 import { LinksCard } from "./LinksCard";
 
 // Add a custom Link
-export function LinksBucket({ bucketName, data, link }) {
+export function LinksBucket({ bucketName, data, link, deleteItem }) {
   const router = useRouter();
 
   const bucketLinkClick = () => {
     console.log("link click", link.link);
-    window.open(link.link, "_blank");
+    if(link.link.substring(0, 8)!=="https://"){
+      window.open("https://"+link.link, "_blank");
+    }
+    else{
+      window.open(link.link, "_blank");
+    }
   };
 
   return (
@@ -36,7 +41,10 @@ export function LinksBucket({ bucketName, data, link }) {
       </Flex>
       <Flex sx={style.grid}>
         {data.map((item, index) => {
-          return <LinksCard key={index} item={item} />;
+          return <LinksCard key={index} item={item} deleteItem={(item)=>{
+            console.log('linksbucket', item);
+            deleteItem(item)}
+          } />;
         })}
       </Flex>
     </Container>
