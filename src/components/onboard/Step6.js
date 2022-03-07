@@ -19,12 +19,12 @@ import "@fontsource/poppins";
 const Step6 = (props) => {
   const ctx = useContext(UserContext);
   const [showPhone, setShowPhone] = useState(true);
-  //  console.log(ctx.userData);
+  console.log(ctx.userData);
   useEffect(() => {
     if (ctx.userData.phone === "+91") {
       setShowPhone(false);
     }
-  }, [ctx.userData.phone, setShowPhone]);
+  },[ctx.userData.phone, setShowPhone]);
   const back = (e) => {
     e.preventDefault();
     props.prevStep();

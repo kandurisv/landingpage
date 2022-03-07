@@ -133,7 +133,7 @@ const Step3 = (props) => {
         instagram: "",
       },
     };
-    // console.log(u_data);
+    console.log(u_data);
     // API Call 1: User Data
     axios(
       {
@@ -144,7 +144,7 @@ const Step3 = (props) => {
       },
       { timeout: 5000 }
     ).then((res) => {
-      //  console.log("Success", res.data);
+      console.log("Success", res.data);
       toast({
         title: "New User Added",
         description: "",
@@ -155,15 +155,15 @@ const Step3 = (props) => {
     });
 
     const u_buckets = {
-      links: ["My Links"],
-      recos: ["My Recos"],
+      links: [{ name: "My Links", link: "" }],
+      recos: [{ name: "My Recos", link: "" }],
     };
     // API Call 2: Buckets
     const buckets = {
       u_id: userDataContext.userSignInInfo.user.uid,
       u_buckets: u_buckets,
     };
-    //  console.log("buckets", buckets);
+    console.log("buckets", buckets);
     axios(
       {
         method: "post",
@@ -174,7 +174,7 @@ const Step3 = (props) => {
       { timeout: 5000 }
     )
       .then((res) => {
-        //  console.log("Success: Buckets Added", res.data);
+        console.log("Success: Buckets Added", res.data);
         router.push("/dashboard");
 
         // toast({

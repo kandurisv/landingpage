@@ -29,8 +29,8 @@ export function MainScreen({ links, recos, buckets, user, cookie }) {
 
   React.useEffect(() => {
     // console.log([...links]);
-    // console.log("NEW LINKS", newLinks);
-    // console.log("EXISTING LINKS", links);
+    console.log("NEW LINKS", newLinks);
+    console.log("EXISTING LINKS", links);
 
     setCurrentLinks([...links, ...newLinks]);
     // axios
@@ -113,11 +113,19 @@ export function MainScreen({ links, recos, buckets, user, cookie }) {
         addProduct={() => setOpenProductsModal(true)}
       />
       <Element name="products">
-        <ShowProducts id="products" data={currentRecos} />
+        <ShowProducts
+          id="products"
+          data={currentRecos}
+          bucketData={JSON.parse(buckets).recos}
+        />
       </Element>
       <Divider />
       <Element name="links">
-        <ShowLinks id="links" data={currentLinks} />
+        <ShowLinks
+          id="links"
+          data={currentLinks}
+          bucketData={JSON.parse(buckets).links}
+        />
       </Element>
     </Container>
   );
