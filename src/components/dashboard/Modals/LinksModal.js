@@ -268,6 +268,7 @@ export function LinksModal({
   const onRefresh = () => {
     setImageName(nanoid());
     setImageSelected(false);
+    setImage({ preview: "", raw: "" });
     setValues({
       id: "",
       u_id: user[0].u_id,
