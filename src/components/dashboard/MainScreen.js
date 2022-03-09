@@ -13,7 +13,8 @@ import { ProductsModal } from "./Modals/ProductsModal";
 import * as Scroll from "react-scroll";
 import { Divider } from "@chakra-ui/react";
 import { nonauthapi } from "lib/api";
-import axios from "axios";
+
+// import { EditLinksModal } from "./Modals/EditLinksModal";
 
 let Element = Scroll.Element;
 
@@ -21,53 +22,29 @@ let Element = Scroll.Element;
 export function MainScreen({ links, recos, buckets, user, cookie }) {
   const [isOpenLinksModal, setOpenLinksModal] = React.useState(false);
   const [isOpenProductsModal, setOpenProductsModal] = React.useState(false);
-
+  // const [isOpenEditLinksModal, setOpenEditLinksModal] = React.useState(false);
+  // const [editLinkItem, setEditLinkItem] = React.useState({});
   const [currentLinks, setCurrentLinks] = React.useState(links);
   const [currentRecos, setCurrentRecos] = React.useState(recos);
   const [newRecos, setNewRecos] = React.useState([]);
   const [newLinks, setNewLinks] = React.useState([]);
+  const [dbLinks, setDbLinks] = React.useState(links);
+  const [dbRecos, setDbRecos] = React.useState(recos);
 
   React.useEffect(() => {
     // console.log([...links]);
+    console.log("CUR LINKS", currentLinks);
     console.log("NEW LINKS", newLinks);
-    console.log("EXISTING LINKS", links);
+    console.log("DB LINKS", dbLinks);
+    // console.log("CUR PRODUCTS", currentRecos);
+    // console.log("Main Screen", editLinkItem);
 
-    setCurrentLinks([...links, ...newLinks]);
-    // axios
-    //   .get(
-    //     `${nonauthapi}links`,
-    //     { params: { u_id: user[0].u_id } },
-    //     { timeout: 3000 }
-    //   )
-    //   .then((res) => res.data)
-    //   .then((responseData) => {
-    //     setCurrentLinks(responseData);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-  }, [isOpenLinksModal, links, newLinks]);
+    setCurrentLinks([...dbLinks, ...newLinks]);
+  }, [isOpenLinksModal, dbLinks, newLinks]);
 
   React.useEffect(() => {
-    setCurrentRecos([...recos, ...newRecos]);
-    // axios
-    //   .get(
-    //     `${nonauthapi}recos`,
-    //     { params: { u_id: user[0].u_id } },
-    //     { timeout: 3000 }
-    //   )
-    //   .then((res) => res.data)
-    //   .then((responseData) => {
-    //     setCurrentRecos(responseData);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-  }, [isOpenProductsModal, recos, newRecos]);
-
-  // useEffect(()=>{
-  //   console.log('uf',currentLinks);
-  // },[currentLinks])
+    setCurrentRecos([...dbRecos, ...newRecos]);
+  }, [isOpenProductsModal, dbRecos, newRecos]);
 
   const onCloseLinksModal = (item) => {
     // console.log("close");
@@ -87,35 +64,74 @@ export function MainScreen({ links, recos, buckets, user, cookie }) {
     setNewLinks([...newLinks, ...item]);
   };
 
-  const deleteLink = (item)=>{
+  const deleteLink = (item) => {
+    console.log("CUR LINKS", currentLinks);
+    console.log("NEW LINKS", newLinks);
+    console.log("DB LINKS", dbLinks);
+
     const curLinks = [...currentLinks];
-    console.log(curLinks)
-    let pos = '';
     curLinks.forEach((element, idx) => {
-      if(element.id===item){
-        pos=idx;
+      if (element.id === item) {
+        curLinks.splice(idx, 1);
       }
     });
-    console.log(pos);
-
-    curLinks.splice(pos, 1);
-    console.log(curLinks);
     setCurrentLinks(curLinks);
-  }
 
-  const deleteReco= (item)=>{
-    const curRecos = [...currentRecos];
-    let pos = '';
-    curRecos.forEach((element, idx) => {
-      if(element.id===item){
-        pos=idx;
+    const nLinks = [...newLinks];
+    nLinks.forEach((element, idx) => {
+      if (element.id === item) {
+        nLinks.splice(idx, 1);
       }
     });
-    console.log(pos);
+    setNewLinks(nLinks);
 
-    curRecos.splice(pos, 1);
+    const dLinks = [...dbLinks];
+    dLinks.forEach((element, idx) => {
+      if (element.id === item) {
+        dLinks.splice(idx, 1);
+      }
+    });
+    setDbLinks(dLinks);
+  };
+
+  const deleteReco = (item) => {
+    const curRecos = [...currentRecos];
+    curRecos.forEach((element, idx) => {
+      if (element.id === item) {
+        curRecos.splice(idx, 1);
+      }
+    });
     setCurrentRecos(curRecos);
-  }
+
+    const nRecos = [...newRecos];
+    nRecos.forEach((element, idx) => {
+      if (element.id === item) {
+        nRecos.splice(idx, 1);
+      }
+    });
+    setNewRecos(nRecos);
+
+    const dRecos = [...dbRecos];
+    dRecos.forEach((element, idx) => {
+      if (element.id === item) {
+        dRecos.splice(idx, 1);
+      }
+    });
+    setDbRecos(dRecos);
+  };
+
+  const onCloseEditLinksModal = (item) => {
+    // console.log("close");
+    setOpenEditLinksModal(false);
+  };
+
+  const editLink = (item) => {
+    console.log("reached", item);
+    setEditLinkItem(item);
+    if (item) {
+      setOpenEditLinksModal(true);
+    }
+  };
 
   return (
     <Container
@@ -142,6 +158,16 @@ export function MainScreen({ links, recos, buckets, user, cookie }) {
         cookie={cookie}
         newItem={(item) => newReco(item)}
       />
+      {/* <EditLinksModal
+        isOpen={isOpenEditLinksModal}
+        closeParent={(item) => onCloseEditLinksModal(item) }
+        buckets={JSON.parse(buckets)}
+        maxSortId={Math.max(...currentRecos.map((o) => o.sort_id), 0)}
+        user={user}
+        cookie={cookie}
+        newItem={(item) => newReco(item)}
+        editLinkItem={editLinkItem}
+      /> */}
       <AddButtons
         addLink={() => setOpenLinksModal(true)}
         addProduct={() => setOpenProductsModal(true)}
@@ -151,7 +177,7 @@ export function MainScreen({ links, recos, buckets, user, cookie }) {
           id="products"
           data={currentRecos}
           bucketData={JSON.parse(buckets).recos}
-          deleteItem={(item)=>deleteReco(item)}
+          deleteItem={(item) => deleteReco(item)}
         />
       </Element>
       <Divider />
@@ -160,7 +186,8 @@ export function MainScreen({ links, recos, buckets, user, cookie }) {
           id="links"
           data={currentLinks}
           bucketData={JSON.parse(buckets).links}
-          deleteItem={(item)=>deleteLink(item)}
+          deleteItem={(item) => deleteLink(item)}
+          // editLinkModal={(item)=>editLink(item)}
         />
       </Element>
     </Container>
