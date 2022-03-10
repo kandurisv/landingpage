@@ -20,7 +20,7 @@ export function MainScreen({ links, recos, user, buckets }) {
   return (
     <>
       <Head>
-        <title>User Dashboard</title>
+        <title>{user[0].u_name}</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <Container
