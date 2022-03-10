@@ -16,6 +16,7 @@ export default function User({ links, recos, user, socials, buckets }) {
   const [summary, setSummary] = React.useState({});
 
   React.useEffect(() => {
+    console.log(user);
     setSummary({ products: recos.length, links: links.length });
   }, []);
 
@@ -57,8 +58,9 @@ export default function User({ links, recos, user, socials, buckets }) {
   return (
     <div>
       <Head>
-        <title>User Screen</title>
+        <title>{user[0].u_name}</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <link rel="icon" href={user[0].u_profile_image} />
       </Head>
 
       <DrawerProvider>
@@ -81,7 +83,7 @@ export default function User({ links, recos, user, socials, buckets }) {
           <Sidebar socials={socials} user={user} summary={summary} />
         </Flex>
         <Flex as="mainscreen" sx={styles.mainscreen}>
-        <MainScreen
+          <MainScreen
             links={links}
             recos={recos}
             user={user}
@@ -171,8 +173,15 @@ const styles = {
     width: "100%",
     backgroundColor: "#fff",
     transition: "all 0.4s ease",
-    borderBottom: [null, null, "1px solid #E9EDF5", "1px solid #E9EDF5", "1px solid #E9EDF5", "1px solid #E9EDF5"],
-    position: ["relative","relative","fixed","fixed","fixed","fixed"],
+    borderBottom: [
+      null,
+      null,
+      "1px solid #E9EDF5",
+      "1px solid #E9EDF5",
+      "1px solid #E9EDF5",
+      "1px solid #E9EDF5",
+    ],
+    position: ["relative", "relative", "fixed", "fixed", "fixed", "fixed"],
     top: 0,
     left: 0,
     zIndex: 100,
@@ -185,11 +194,18 @@ const styles = {
   },
 
   headerContainer: {
-    mb: [-124,-124,0,0,0,0],
+    mb: [-124, -124, 0, 0, 0, 0],
     display: "flex",
     alignItems: "center",
-    flexDirection:[ "column", "column", "row","row", "row","row"],
-    justifyContent: ["center", "center","space-between","space-between","space-between","space-between"],
+    flexDirection: ["column", "column", "row", "row", "row", "row"],
+    justifyContent: [
+      "center",
+      "center",
+      "space-between",
+      "space-between",
+      "space-between",
+      "space-between",
+    ],
     maxWidth: ["100%", null, null, null, null, "1172px", "1280px"],
   },
 
@@ -199,16 +215,16 @@ const styles = {
     ":hover": {
       bg: "#C23043",
     },
-    borderRadius:[10, 10, 24, 24, 24, 24],
+    borderRadius: [10, 10, 24, 24, 24, 24],
     color: "white",
     fontSize: "md",
     width: "md",
-    height: [40,40,50,50,50,50,50],
-    mt: [24,24,0,0,0,0]
+    height: [40, 40, 50, 50, 50, 50, 50],
+    mt: [24, 24, 0, 0, 0, 0],
   },
   logoStyles: {
     // display:"flex",
     // alignItems: "center",
     // mx:[86,148,0,0,0,0]
-  }
+  },
 };
