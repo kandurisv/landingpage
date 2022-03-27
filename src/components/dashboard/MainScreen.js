@@ -1,29 +1,40 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { jsx, Container, Flex, Image, Text } from "theme-ui";
-
-import { useRouter } from "next/router";
-import { ShowProducts } from "./MainScreen/ShowProducts";
-import { ShowLinks } from "./MainScreen/ShowLinks";
+import { Divider } from "@chakra-ui/react";
+import React from "react";
+import * as Scroll from "react-scroll";
+import { Flex } from "@chakra-ui/react";
 import { AddButtons } from "./MainScreen/AddButtons";
-
-import React, { useEffect } from "react";
+import { ShowLinks } from "./MainScreen/ShowLinks";
+import { ShowProducts } from "./MainScreen/ShowProducts";
+import { EditLinksModal } from "./Modals/EditLinksModal";
+import { EditProductsModal } from "./Modals/EditProductsModal";
 import { LinksModal } from "./Modals/LinksModal";
 import { ProductsModal } from "./Modals/ProductsModal";
-import * as Scroll from "react-scroll";
-import { Divider } from "@chakra-ui/react";
-import { nonauthapi } from "lib/api";
-
-// import { EditLinksModal } from "./Modals/EditLinksModal";
+import mainScreenStyles from "styles/MainScreen";
+import { AnalyticsModal } from "./Modals/AnalyticsModal";
+import { event } from "analytics/ga";
 
 let Element = Scroll.Element;
 
 // Add a custom Link
-export function MainScreen({ links, recos, buckets, user, cookie }) {
+export function MainScreen({
+  links,
+  recos,
+  buckets,
+  user,
+  cookie,
+  linkAnalytics,
+  prodAnalytics,
+}) {
   const [isOpenLinksModal, setOpenLinksModal] = React.useState(false);
   const [isOpenProductsModal, setOpenProductsModal] = React.useState(false);
-  // const [isOpenEditLinksModal, setOpenEditLinksModal] = React.useState(false);
-  // const [editLinkItem, setEditLinkItem] = React.useState({});
+  const [isOpenAnalyticsModal, setOpenAnalyticsModal] = React.useState(false);
+
+  const [isOpenEditLinksModal, setOpenEditLinksModal] = React.useState(false);
+  const [editLinkItem, setEditLinkItem] = React.useState({});
+  const [isOpenEditProductsModal, setOpenEditProductsModal] =
+    React.useState(false);
+  const [editProductItem, setEditProductItem] = React.useState({});
+
   const [currentLinks, setCurrentLinks] = React.useState(links);
   const [currentRecos, setCurrentRecos] = React.useState(recos);
   const [newRecos, setNewRecos] = React.useState([]);
@@ -32,15 +43,15 @@ export function MainScreen({ links, recos, buckets, user, cookie }) {
   const [dbRecos, setDbRecos] = React.useState(recos);
 
   React.useEffect(() => {
-    // console.log([...links]);
-    console.log("CUR LINKS", currentLinks);
-    console.log("NEW LINKS", newLinks);
-    console.log("DB LINKS", dbLinks);
+    // console.log("MAINSCREEN UFX");
+    // console.log("CUR LINKS", currentLinks);
+    // console.log("NEW LINKS", newLinks);
+    // console.log("DB LINKS", dbLinks);
     // console.log("CUR PRODUCTS", currentRecos);
     // console.log("Main Screen", editLinkItem);
 
     setCurrentLinks([...dbLinks, ...newLinks]);
-  }, [isOpenLinksModal, dbLinks, newLinks]);
+  }, [isOpenLinksModal, dbLinks, newLinks, isOpenEditLinksModal]);
 
   React.useEffect(() => {
     setCurrentRecos([...dbRecos, ...newRecos]);
@@ -56,6 +67,11 @@ export function MainScreen({ links, recos, buckets, user, cookie }) {
     setOpenProductsModal(false);
   };
 
+  const onCloseAnalyticsModal = (item) => {
+    // console.log("close");
+    setOpenAnalyticsModal(false);
+  };
+
   const newReco = (item) => {
     setNewRecos([...newRecos, ...item]);
   };
@@ -65,9 +81,10 @@ export function MainScreen({ links, recos, buckets, user, cookie }) {
   };
 
   const deleteLink = (item) => {
-    console.log("CUR LINKS", currentLinks);
-    console.log("NEW LINKS", newLinks);
-    console.log("DB LINKS", dbLinks);
+    // console.log(item);
+    // console.log("CUR LINKS", currentLinks);
+    // console.log("NEW LINKS", newLinks);
+    // console.log("DB LINKS", dbLinks);
 
     const curLinks = [...currentLinks];
     curLinks.forEach((element, idx) => {
@@ -126,20 +143,93 @@ export function MainScreen({ links, recos, buckets, user, cookie }) {
   };
 
   const editLink = (item) => {
-    console.log("reached", item);
-    setEditLinkItem(item);
+    // console.log("reached", item);
+    setEditLinkItem((prev) => item);
     if (item) {
       setOpenEditLinksModal(true);
     }
   };
+  // console.log("DB LINKS", dbLinks);
+
+  const editLinkSave = (item) => {
+    // console.log("EDIT LINK");
+    // console.log("CUR LINKS", currentLinks);
+    // console.log("NEW LINKS", newLinks);
+
+    const curLinks = [...currentLinks];
+    curLinks.forEach((element, idx) => {
+      if (element.id === item.id) {
+        // console.log("BEFORE", curLinks);
+        curLinks.splice(idx, 1, item);
+      }
+    });
+    setCurrentLinks(curLinks);
+
+    const nLinks = [...newLinks];
+    // console.log("nLinks", nLinks);
+    nLinks.forEach((element, idx) => {
+      // console.log("ELEMENT.ID", element.id);
+      if (element.id === item.id) {
+        nLinks.splice(idx, 1, item);
+      }
+    });
+    setNewLinks(nLinks);
+
+    const dLinks = [...dbLinks];
+    dLinks.forEach((element, idx) => {
+      if (element.id === item.id) {
+        dLinks.splice(idx, 1, item);
+      }
+    });
+    setDbLinks(dLinks);
+    setOpenEditLinksModal(false);
+  };
+
+  const onCloseEditProductsModal = (item) => {
+    // console.log("close");
+    setOpenEditProductsModal(false);
+  };
+
+  const editProduct = (item) => {
+    // console.log("reached", item);
+    setEditProductItem((prev) => item);
+    if (item) {
+      setOpenEditProductsModal(true);
+    }
+  };
+
+  const editProductSave = (item) => {
+    // console.log("SAVE", item);
+    const curRecos = [...currentRecos];
+    curRecos.forEach((element, idx) => {
+      if (element.id === item.id) {
+        // console.log("BEFORE", curRecos);
+        curRecos.splice(idx, 1, item);
+      }
+    });
+    setCurrentRecos(curRecos);
+
+    const nRecos = [...newRecos];
+    nRecos.forEach((element, idx) => {
+      if (element.id === item.id) {
+        nRecos.splice(idx, 1, item);
+      }
+    });
+    setNewRecos(nRecos);
+
+    const dRecos = [...dbRecos];
+    dRecos.forEach((element, idx) => {
+      if (element.id === item.id) {
+        dRecos.splice(idx, 1, item);
+      }
+    });
+    setDbRecos(dRecos);
+
+    setOpenEditProductsModal(false);
+  };
 
   return (
-    <Container
-      sx={{
-        px: "0px",
-        width: ["100%", "100%", "100%", null],
-      }}
-    >
+    <Flex sx={mainScreenStyles.container}>
       <LinksModal
         isOpen={isOpenLinksModal}
         closeParent={(item) => onCloseLinksModal(item)}
@@ -158,26 +248,68 @@ export function MainScreen({ links, recos, buckets, user, cookie }) {
         cookie={cookie}
         newItem={(item) => newReco(item)}
       />
-      {/* <EditLinksModal
+      <AnalyticsModal
+        isOpen={isOpenAnalyticsModal}
+        closeParent={(item) => onCloseAnalyticsModal(item)}
+        user={user}
+        linkAnalytics={linkAnalytics}
+        prodAnalytics={prodAnalytics}
+      />
+      <EditLinksModal
         isOpen={isOpenEditLinksModal}
-        closeParent={(item) => onCloseEditLinksModal(item) }
+        closeParent={(item) => onCloseEditLinksModal(item)}
+        buckets={JSON.parse(buckets)}
+        maxSortId={Math.max(...currentLinks.map((o) => o.sort_id), 0)}
+        user={user}
+        cookie={cookie}
+        editLinkItem={editLinkItem}
+        editLinkSave={editLinkSave}
+      />
+      <EditProductsModal
+        isOpen={isOpenEditProductsModal}
+        closeParent={(item) => onCloseEditProductsModal(item)}
         buckets={JSON.parse(buckets)}
         maxSortId={Math.max(...currentRecos.map((o) => o.sort_id), 0)}
         user={user}
         cookie={cookie}
-        newItem={(item) => newReco(item)}
-        editLinkItem={editLinkItem}
-      /> */}
-      <AddButtons
-        addLink={() => setOpenLinksModal(true)}
-        addProduct={() => setOpenProductsModal(true)}
+        editProductItem={editProductItem}
+        editProductSave={editProductSave}
       />
+      <AddButtons
+        addLink={() => {
+          event("SIGNED_IN_USER_ADD_LINKS_MODAL", {
+            user: user,
+          });
+          setOpenLinksModal(true);
+        }}
+        addProduct={() => {
+          event("SIGNED_IN_USER_ADD_RECOS_MODAL", {
+            user: user,
+          });
+          setOpenProductsModal(true);
+        }}
+        showAnalytics={() => {
+          event("SIGNED_IN_USER_SHOW_ANALYTICS_MODAL", {
+            user: user,
+          });
+          setOpenAnalyticsModal(true);
+        }}
+      />
+
+      <Divider />
       <Element name="products">
         <ShowProducts
           id="products"
           data={currentRecos}
           bucketData={JSON.parse(buckets).recos}
           deleteItem={(item) => deleteReco(item)}
+          editProductModal={(item) => {
+            event("SIGNED_IN_USER_EDIT_RECOS_MODAL", {
+              user: user,
+              item: item,
+            });
+            editProduct(item);
+          }}
         />
       </Element>
       <Divider />
@@ -187,10 +319,16 @@ export function MainScreen({ links, recos, buckets, user, cookie }) {
           data={currentLinks}
           bucketData={JSON.parse(buckets).links}
           deleteItem={(item) => deleteLink(item)}
-          // editLinkModal={(item)=>editLink(item)}
+          editLinkModal={(item) => {
+            event("SIGNED_IN_USER_EDIT_LINKS_MODAL", {
+              user: user,
+              item: item,
+            });
+            editLink(item);
+          }}
         />
       </Element>
-    </Container>
+    </Flex>
   );
 }
 
