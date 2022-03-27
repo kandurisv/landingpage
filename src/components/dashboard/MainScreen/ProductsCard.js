@@ -1,24 +1,23 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { jsx, Container, Flex, Image, Text, Grid } from "theme-ui";
-import firebase from "firebase";
-import { auth, googleAuthProvider } from "../../../lib/firebase";
-import { Button } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import { BsThreeDotsVertical } from "react-icons/bs";
-import axios from "axios";
-import { authapi } from "lib/api";
 import {
+  Flex,
+  IconButton,
+  Image,
   Menu,
   MenuButton,
-  MenuList,
   MenuItem,
-  IconButton,
+  MenuList,
+  Text,
   useDisclosure,
-} from '@chakra-ui/react'
-import { useEffect, useState } from "react";
+} from "@chakra-ui/react";
+import { event } from "analytics/ga";
+import axios from "axios";
+import { authapi } from "lib/api";
+import { useRouter } from "next/router";
+
+import { BsThreeDotsVertical } from "react-icons/bs";
+import productsCardStyles from "styles/ProductsCard";
 // Add a custom Link
-export function ProductsCard({ item, deleteItem }) {
+export function ProductsCard({ item, deleteItem, editProductModal }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
 
@@ -27,19 +26,18 @@ export function ProductsCard({ item, deleteItem }) {
   };
 
   const buy = () => {
-    console.log(item);
+    event("SIGNED_IN_USER_BUY_PRODUCT", item);
     localStorage.setItem("buyLatestItem", item.prod_name);
-    if(item.prod_link.substring(0, 8)!=="https://"){
-      window.open("https://"+item.prod_link, "_blank");
-    }
-    else{
+    if (item.prod_link.substring(0, 8) !== "https://") {
+      window.open("https://" + item.prod_link, "_blank");
+    } else {
       window.open(item.prod_link, "_blank");
     }
   };
 
-  const deleteCard = ()=>{
-    deleteItem(item.id)
-    console.log('recoscard', item.id);
+  const deleteProduct = () => {
+    deleteItem(item.id);
+    // console.log("recoscard", item.id);
     axios(
       {
         method: "post",
@@ -51,137 +49,74 @@ export function ProductsCard({ item, deleteItem }) {
       },
       { timeout: 1000 }
     )
-    .then((res) => {
-      console.log(res)
-      toast({
-        title: "Card deleted",
-        description: "",
-        status: "success",
-        duration: 1000,
-        isClosable: true,
+      .then((res) => {
+        // console.log(res);
+        toast({
+          title: "Card deleted",
+          description: "",
+          status: "success",
+          duration: 1000,
+          isClosable: true,
+        });
+      })
+      .catch((e) => {
+        // console.log(e);
       });
-    })
-    .catch((e) => {
-      // console.log(e);
-    });
+  };
 
+  const editProduct = () => {
+    editProductModal(item);
   };
 
   return (
-    <Flex sx={style.container}>
-      <Flex sx={style.imageMaster}>
-        <Flex sx={style.imageContainer}>
+    <Flex sx={productsCardStyles.container} onClick={buy}>
+      <Flex sx={productsCardStyles.imageMaster}>
+        <Flex sx={productsCardStyles.imageContainer}>
           <Image
             src={item.photo || "/user/mobile.png"}
             alt="img"
-            sx={style.image}
+            sx={productsCardStyles.image}
           />
         </Flex>
       </Flex>
-      
-      <Flex sx={style.detailsContainer}>
-        <Flex sx={style.content}>
-          <Text sx={style.product}>{item.prod_name}</Text>
-          <Text sx={style.category}>{item.cat_name}</Text>
+      <Flex sx={productsCardStyles.categoryDetailsContainer}>
+        <Flex sx={productsCardStyles.categoryContent}>
+          <Text sx={productsCardStyles.category}>{item.cat_name}</Text>
         </Flex>
-        <Flex sx={style.buttonContainer}>
-          <Flex sx={style.button} onClick={buy}>
-            <Text sx={style.buttonText}>Buy Now</Text>
+      </Flex>
+      <Flex sx={productsCardStyles.detailsContainer}>
+        <Flex sx={productsCardStyles.content}>
+          <Text sx={productsCardStyles.product}>{item.prod_name}</Text>
+        </Flex>
+        {/* <Flex sx={productsCardStyles.buttonContainer}>
+          <Flex sx={productsCardStyles.button} onClick={buy}>
+            <Text sx={productsCardStyles.buttonText}>Buy Now</Text>
           </Flex>
-        </Flex>
+        </Flex> */}
       </Flex>
 
       <Menu isOpen={isOpen}>
-          <MenuButton
-            width={"fit-content"}
-            border="none"
-            as={IconButton}
-            icon={<BsThreeDotsVertical />}
-            variant='outline'
-            onMouseEnter={onOpen}
-            onMouseLeave={onClose}
-          />
-          <MenuList onMouseEnter={onOpen} onMouseLeave={onClose}>
-            {/* <MenuItem onClick={editCard}> Edit </MenuItem> */}
-            <MenuItem onClick={deleteCard}> Delete </MenuItem>
-          </MenuList>
-        </Menu>
+        <MenuButton
+          as={IconButton}
+          icon={<BsThreeDotsVertical />}
+          variant="outline"
+          onMouseEnter={onOpen}
+          onMouseLeave={onClose}
+          sx={{
+            width: "fit-content",
+            border: "none",
+            position: "absolute",
+            top: "-12px",
+            right: "-18px",
+            backgroundColor: "white",
+            padding: "0px",
+          }}
+        />
+        <MenuList onMouseEnter={onOpen} onMouseLeave={onClose} minWidth="148px">
+          <MenuItem onClick={editProduct}> Edit </MenuItem>
+          <MenuItem onClick={deleteProduct}> Delete </MenuItem>
+        </MenuList>
+      </Menu>
     </Flex>
   );
 }
-
-const style = {
-  container: {
-    flexDirection: "row",
-    p: "8px",
-    py: "16px",
-    backgroundColor: "white",
-    borderRadius: "16px",
-    boxShadow: "0 0 4px 1px rgba(0, 0, 0, 0.1)",
-    width: ["100%", "100%", "350px", "350px", "448px", "448px"],
-    minWidth: "330px",
-    mx: "16px",
-    my: "16px",
-  },
-  imageMaster: {
-    backgroundColor: "white",
-  },
-  imageContainer: {
-    mx: "8px",
-    backgroundColor: "white",
-  },
-  image: {
-    height: "96px",
-    width: "148px",
-    borderRadius: "6px",
-  },
-  detailsContainer: {
-    backgroundColor: "white",
-    flexDirection: "column",
-    ml: "8px",
-    width: "248px",
-    justifyContent: "space-between",
-    py: "8px",
-  },
-  buttonText: {
-    width: "100%",
-    height: "100%",
-    backgroundColor: "transparent",
-    borderWidth: "0px",
-    color: "white",
-    fontWeight: "medium",
-    fontFamily: "Poppins",
-    fontSize: "16px",
-    cursor: "pointer",
-    textAlign: "center",
-  },
-  button: {
-    backgroundColor: "#D7354A",
-    borderRadius: "24px",
-    borderColor: "#D7354A",
-    py: "4px",
-    width: "148px",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  content: {
-    flexDirection: "column",
-  },
-  buttonContainer: {
-    justifyContent: "center",
-    width: "100%",
-  },
-  product: {
-    fontFamily: "Poppins",
-    fontWeight: "medium",
-    fontSize: "24px",
-    color: "#000",
-  },
-  category: {
-    fontFamily: "Poppins",
-    fontWeight: "medium",
-    fontSize: "16px",
-    color: "#D7354A",
-  },
-  buynow: {},
-};
