@@ -6,6 +6,7 @@ import { ProductsBucket } from "./ProductsBucket";
 export function ShowProducts({
   data,
   bucketData,
+  cookie,
   deleteItem,
   editProductModal,
 }) {
@@ -22,13 +23,14 @@ export function ShowProducts({
   };
 
   return (
-    <Flex sx={{ width: "95%", mx: "auto" }}>
+    <Flex sx={{ width: "95%", mx: "auto" }} id="recos">
       {buckets.map((item, index) => {
         return (
           <ProductsBucket
             key={index}
             bucketName={buckets[index]}
             data={data.filter((item) => item.bucket === buckets[index])}
+            cookie={cookie}
             link={
               bucketData.filter((item) => item.name === buckets[index])[0] || ""
             }
