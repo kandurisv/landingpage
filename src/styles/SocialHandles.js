@@ -6,6 +6,8 @@ const socialHandlesStyles = {
   },
   grid: {
     mx: ["-48px","-48px","8px","8px","8px","8px"],
+    py:"8px",
+    borderRadius: "5px",
     // backgroundColor:"red",
   },
   headingTextView: {
@@ -41,8 +43,12 @@ const socialHandlesStyles = {
     textAlign: "center",
   },
   addbutton: {
+    ml:["auto", "auto", "16px", "16px", "16px", "16px"],
     cursor: "pointer",
     backgroundColor: "transparent",
+  },
+  addButton1: {
+    mr:["auto", "auto", "16px", "16px", "16px", "16px"],
   },
   addContainer: {
     textAlign: "center",
@@ -54,7 +60,7 @@ const socialHandlesStyles = {
     color: "#FFFFFF",
   },
   socialAddFlex: {
-      justifyContent: "center",
+      justifyContent: "space-between",
       alignItems: "center",
       mt: "8px",
   },
