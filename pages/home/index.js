@@ -41,10 +41,12 @@ export default function Home() {
 
   React.useEffect(() => {
     initOptimize();
+    pageview("home");
+    event("LANDED_ON_HOME_PAGE", {});
     // console.log("Variant", variant);
     const handleRouteChange = (url) => {
       pageview(url);
-      event("LANDED_ON_HOME_PAGE");
+      event("LANDED_ON_HOME_PAGE", {});
     };
 
     //When the component is mounted, subscribe to router changes
