@@ -1,4 +1,15 @@
-import { Flex, Image, Input, InputGroup, InputLeftAddon, Modal, ModalContent, ModalOverlay, Text, useToast } from "@chakra-ui/react";
+import {
+  Flex,
+  Image,
+  Input,
+  InputGroup,
+  InputLeftAddon,
+  Modal,
+  ModalContent,
+  ModalOverlay,
+  Text,
+  useToast,
+} from "@chakra-ui/react";
 import axios from "axios";
 import { authapi } from "lib/api";
 import Lottie from "lottie-react";
@@ -45,7 +56,11 @@ const SocialCategory = ({ category, data, onClickItem, currentSocials }) => {
                   position: "relative",
                 }}
               >
-                <Image src={item.social_logo} alt="img" sx={socialModalStyles.social} />
+                <Image
+                  src={item.social_logo}
+                  alt="img"
+                  sx={socialModalStyles.social}
+                />
                 <Flex sx={{ position: "absolute", top: "-4px", right: "40px" }}>
                   {currentSocials.filter(
                     (item1, index1) => item1.social_id === item.social_id
@@ -94,6 +109,7 @@ export function SocialModal({
   const [values, setValues] = React.useState([]);
 
   useEffect(() => {
+    setValues([]);
     // console.log("data in social modal", data);
     data.map((item, index) => {
       setValues((values) => [
@@ -255,9 +271,7 @@ export function SocialModal({
               <Lottie animationData={smm} />
             </Flex>
             <Flex sx={socialModalStyles.linkView}>
-              <Flex
-                sx={socialModalStyles.innerFlex}
-              >
+              <Flex sx={socialModalStyles.innerFlex}>
                 {uniqueCategories.map((category, index) => {
                   return (
                     <SocialCategory
@@ -276,11 +290,7 @@ export function SocialModal({
               </Flex>
               {inputActive && !newInput ? (
                 <Flex sx={socialModalStyles.addlink}>
-                  <Text
-                    sx={socialModalStyles.username}
-                  >
-                    Enter Username
-                  </Text>
+                  <Text sx={socialModalStyles.username}>Enter Username</Text>
                   <InputGroup size="lg">
                     <InputLeftAddon>{inputLink}</InputLeftAddon>
                     <Input
